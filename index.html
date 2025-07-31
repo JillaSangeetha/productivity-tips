@@ -20,4 +20,72 @@
       background-color: #fff;
       padding: 30px;
       border-radius: 12px;
-      box-shadow: 0 5
+      box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+      text-align: center;
+      max-width: 500px;
+    }
+
+    h1 {
+      margin-bottom: 20px;
+      color: #0077cc;
+    }
+
+    #tip {
+      font-size: 20px;
+      margin: 20px 0;
+      font-weight: 500;
+    }
+
+    button {
+      padding: 10px 20px;
+      background-color: #0077cc;
+      color: white;
+      border: none;
+      border-radius: 6px;
+      cursor: pointer;
+      font-size: 16px;
+    }
+
+    button:hover {
+      background-color: #005fa3;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h1>💡 Random Productivity Tip</h1>
+    <div id="tip">Loading...</div>
+    <button onclick="getRandomTip()">Show Another Tip</button>
+  </div>
+
+  <script>
+    window.onload = function () {
+      const tips = [
+        "Take short breaks every hour.",
+        "Use the Pomodoro technique.",
+        "Declutter your workspace.",
+        "Write down daily goals.",
+        "Use a task manager app.",
+        "Avoid multitasking.",
+        "Prioritize your top 3 tasks.",
+        "Start your day with the hardest task.",
+        "Review your progress at the end of the day.",
+        "Eliminate distractions while working.",
+        "Keep a bottle of water nearby.",
+        "Try to wake up 30 mins earlier.",
+        "Use ‘Do Not Disturb’ mode during deep work.",
+        "Check emails only twice a day.",
+        "Batch similar tasks together."
+      ];
+
+      function getRandomTip() {
+        const randomIndex = Math.floor(Math.random() * tips.length);
+        document.getElementById("tip").innerText = tips[randomIndex];
+      }
+
+      window.getRandomTip = getRandomTip; // Make the function accessible to the button
+      getRandomTip(); // Show first tip on load
+    };
+  </script>
+</body>
+</html>
