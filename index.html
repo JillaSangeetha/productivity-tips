@@ -1,91 +1,230 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Random Productivity Tip</title>
-  <style>
-    body {
-      background-color: #f5f5f5;
-      color: #333;
-      font-family: Arial, sans-serif;
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      height: 100vh;
-      margin: 0;
-    }
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Random Productivity Tips</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
 
-    .container {
-      background-color: #fff;
-      padding: 30px;
-      border-radius: 12px;
-      box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
-      text-align: center;
-      max-width: 500px;
-    }
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: 
+                radial-gradient(circle at 20% 80%, rgba(120, 219, 226, 0.3) 0%, transparent 50%),
+                radial-gradient(circle at 80% 20%, rgba(255, 177, 153, 0.3) 0%, transparent 50%),
+                radial-gradient(circle at 40% 40%, rgba(142, 202, 230, 0.2) 0%, transparent 50%),
+                linear-gradient(135deg, #a8e6cf 0%, #dcedc8 25%, #f8bbd9 50%, #e1bee7 75%, #b3e5fc 100%);
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 20px;
+            position: relative;
+            overflow: hidden;
+        }
 
-    h1 {
-      margin-bottom: 20px;
-      color: #0077cc;
-    }
+        body::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background-image: 
+                radial-gradient(circle at 25% 25%, rgba(255, 255, 255, 0.1) 2px, transparent 2px),
+                radial-gradient(circle at 75% 75%, rgba(255, 255, 255, 0.08) 1px, transparent 1px);
+            background-size: 60px 60px, 40px 40px;
+            animation: floatPattern 20s ease-in-out infinite;
+            pointer-events: none;
+        }
 
-    #tip {
-      font-size: 20px;
-      margin: 20px 0;
-      font-weight: 500;
-    }
+        @keyframes floatPattern {
+            0%, 100% { transform: translate(0, 0) rotate(0deg); }
+            33% { transform: translate(10px, -10px) rotate(1deg); }
+            66% { transform: translate(-5px, 5px) rotate(-1deg); }
+        }
 
-    button {
-      padding: 10px 20px;
-      background-color: #0077cc;
-      color: white;
-      border: none;
-      border-radius: 6px;
-      cursor: pointer;
-      font-size: 16px;
-    }
+        .container {
+            background: rgba(255, 255, 255, 0.9);
+            backdrop-filter: blur(20px);
+            border-radius: 25px;
+            padding: 40px;
+            box-shadow: 
+                0 25px 50px rgba(0, 0, 0, 0.08),
+                0 0 0 1px rgba(255, 255, 255, 0.3);
+            max-width: 600px;
+            width: 100%;
+            text-align: center;
+            transition: transform 0.3s ease;
+            position: relative;
+            z-index: 1;
+        }
 
-    button:hover {
-      background-color: #005fa3;
-    }
-  </style>
+        .container::before {
+            content: '';
+            position: absolute;
+            top: -2px;
+            left: -2px;
+            right: -2px;
+            bottom: -2px;
+            background: linear-gradient(45deg, #a8e6cf, #dcedc8, #f8bbd9, #e1bee7, #b3e5fc);
+            border-radius: 27px;
+            z-index: -1;
+            opacity: 0.3;
+        }
+
+        .container:hover {
+            transform: translateY(-5px);
+        }
+
+        h1 {
+            color: #333;
+            margin-bottom: 30px;
+            font-size: 2.5em;
+            font-weight: 300;
+            letter-spacing: -1px;
+        }
+
+        .tip-display {
+            background: linear-gradient(135deg, rgba(168, 230, 207, 0.1), rgba(220, 237, 200, 0.1));
+            border-left: 5px solid #81c784;
+            padding: 30px;
+            margin: 30px 0;
+            border-radius: 15px;
+            min-height: 120px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: all 0.5s ease;
+            box-shadow: 0 8px 25px rgba(129, 199, 132, 0.1);
+        }
+
+        .tip-text {
+            font-size: 1.2em;
+            line-height: 1.6;
+            color: #555;
+            font-style: italic;
+        }
+
+        .new-tip-btn {
+            background: linear-gradient(45deg, #81c784, #a5d6a7);
+            color: white;
+            border: none;
+            padding: 15px 30px;
+            font-size: 1.1em;
+            border-radius: 50px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 20px rgba(129, 199, 132, 0.3);
+            text-shadow: 0 1px 2px rgba(0, 0, 0, 0.1);
+        }
+
+        .new-tip-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 25px rgba(129, 199, 132, 0.4);
+            background: linear-gradient(45deg, #66bb6a, #81c784);
+        }
+
+        .new-tip-btn:active {
+            transform: translateY(0);
+        }
+
+        .tip-counter {
+            margin-top: 20px;
+            color: #666;
+            font-size: 0.9em;
+        }
+
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .fade-in {
+            animation: fadeIn 0.5s ease;
+        }
+    </style>
 </head>
 <body>
-  <div class="container">
-    <h1>💡 Random Productivity Tip</h1>
-    <div id="tip">Loading...</div>
-    <button onclick="getRandomTip()">Show Another Tip</button>
-  </div>
+    <div class="container">
+        <h1>💡 Productivity Tips</h1>
+        <div class="tip-display" id="tipDisplay">
+            <div class="tip-text" id="tipText">Click the button below to get your first productivity tip!</div>
+        </div>
+        <button class="new-tip-btn" id="newTipBtn" onclick="showRandomTip()">Get New Tip</button>
+        <div class="tip-counter" id="tipCounter">Tips viewed: 0</div>
+    </div>
 
-  <script>
-    window.onload = function () {
-      const tips = [
-        "Take short breaks every hour.",
-        "Use the Pomodoro technique.",
-        "Declutter your workspace.",
-        "Write down daily goals.",
-        "Use a task manager app.",
-        "Avoid multitasking.",
-        "Prioritize your top 3 tasks.",
-        "Start your day with the hardest task.",
-        "Review your progress at the end of the day.",
-        "Eliminate distractions while working.",
-        "Keep a bottle of water nearby.",
-        "Try to wake up 30 mins earlier.",
-        "Use ‘Do Not Disturb’ mode during deep work.",
-        "Check emails only twice a day.",
-        "Batch similar tasks together."
-      ];
+    <script>
+        const productivityTips = [
+            "Use the 2-minute rule: If a task takes less than 2 minutes, do it immediately instead of adding it to your to-do list.",
+            "Try the Pomodoro Technique: Work for 25 minutes, then take a 5-minute break. Repeat this cycle 4 times, then take a longer break.",
+            "Batch similar tasks together to minimize context switching and maintain focus.",
+            "Start your day by identifying your 3 most important tasks (MITs) and tackle them first.",
+            "Use the 'Eat the Frog' method: Do your most challenging or important task first thing in the morning.",
+            "Keep a 'done' list alongside your to-do list to track your accomplishments and stay motivated.",
+            "Apply the 80/20 rule (Pareto Principle): Focus on the 20% of tasks that produce 80% of your results.",
+            "Set specific time blocks for checking email instead of constantly monitoring your inbox.",
+            "Use the 'One Touch' rule for emails: When you open an email, either respond, delete, or file it immediately.",
+            "Create a dedicated workspace that signals to your brain it's time to focus and be productive.",
+            "Take regular breaks to prevent burnout and maintain high performance throughout the day.",
+            "Use keyboard shortcuts to save time on repetitive computer tasks.",
+            "Plan your day the night before to hit the ground running each morning.",
+            "Eliminate or minimize distractions by turning off non-essential notifications.",
+            "Use the 'Two-Day Rule': Never allow yourself to skip a habit two days in a row.",
+            "Practice saying 'no' to requests that don't align with your priorities and goals.",
+            "Keep a notepad nearby to quickly jot down ideas so they don't interrupt your current task.",
+            "Use templates for recurring tasks like emails, reports, or presentations to save time.",
+            "Set artificial deadlines that are earlier than the real ones to build in buffer time.",
+            "Review and reflect on your productivity weekly to identify what's working and what isn't.",
+            "Use the 'Getting Things Done' method: Capture everything in a trusted system outside your head.",
+            "Group similar meetings together to create longer blocks of uninterrupted work time.",
+            "Take advantage of your natural energy rhythms - schedule demanding work during your peak hours.",
+            "Use the 'Swiss Cheese' method for large projects: poke holes in them by doing small parts randomly.",
+            "Automate repetitive tasks whenever possible using tools, apps, or scripts."
+        ];
 
-      function getRandomTip() {
-        const randomIndex = Math.floor(Math.random() * tips.length);
-        document.getElementById("tip").innerText = tips[randomIndex];
-      }
+        let tipCount = 0;
+        let lastTipIndex = -1;
 
-      window.getRandomTip = getRandomTip; // Make the function accessible to the button
-      getRandomTip(); // Show first tip on load
-    };
-  </script>
+        function showRandomTip() {
+            let randomIndex;
+            
+            // Ensure we don't show the same tip twice in a row
+            do {
+                randomIndex = Math.floor(Math.random() * productivityTips.length);
+            } while (randomIndex === lastTipIndex && productivityTips.length > 1);
+            
+            lastTipIndex = randomIndex;
+            tipCount++;
+            
+            const tipText = document.getElementById('tipText');
+            const tipDisplay = document.getElementById('tipDisplay');
+            const tipCounter = document.getElementById('tipCounter');
+            
+            // Add fade-in animation
+            tipDisplay.classList.remove('fade-in');
+            void tipDisplay.offsetWidth; // Trigger reflow
+            tipDisplay.classList.add('fade-in');
+            
+            tipText.textContent = productivityTips[randomIndex];
+            tipCounter.textContent = `Tips viewed: ${tipCount}`;
+        }
+
+        // Show a random tip on page load
+        document.addEventListener('DOMContentLoaded', function() {
+            showRandomTip();
+        });
+    </script>
 </body>
 </html>
